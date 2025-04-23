@@ -18,20 +18,22 @@ public class ClienteService {
     // Para facilitar la inyección de dependencias agrego @autowired7
     @Autowired
     public ClienteService(ClienteRepository clienteRepository) {
+
         this.clienteRepository = clienteRepository;
     }
 
     // Metodo para obtener todas las instancias de User
     public List<Cliente> getClientes() {
+
         return clienteRepository.findAll();
     }
 
-    // Metodo para crear un nuevo usuario
+    // Metodo para crear un nuevo usuario  http://localhost:8080/api/perseflora/cliente
     public Cliente createCliente(Cliente newCliente) {
         return clienteRepository.save(newCliente);
     }
 
-    // Metodo para recuperar un usuario por email
+    // Metodo para recuperar un usuario por email http://localhost:8080/api/perseflora/users/email/{email}
     public Cliente findByEmail(String email) {
         return clienteRepository.findByEmail(email);
     }
@@ -52,7 +54,7 @@ public class ClienteService {
     }
 
     //Metodo para actualizar nuestro User (findById, save)
-    //PUT -> Actualizar todos los atributos
+    //PUT -> Actualizar todos los atributos   http://localhost:8080/api/perseflora/users/update-cliente/2
 
     public  Cliente updateCliente(Cliente cliente, Long idCliente){
         return clienteRepository.findById(idCliente)

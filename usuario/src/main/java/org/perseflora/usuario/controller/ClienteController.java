@@ -16,7 +16,7 @@ import java.util.List;
 public class ClienteController {
     private final ClienteService clienteService;
 
-    @Autowired
+    @Autowired //inyección automatica de dependencias
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
@@ -38,6 +38,15 @@ public class ClienteController {
     public ResponseEntity<Cliente> getById(@PathVariable Long idCliente) {
         try {
             return ResponseEntity.ok(clienteService.findById(idCliente));
+        } catch (ClienteNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("{emailCliente}")
+    public ResponseEntity<Cliente> getByEmail(@PathVariable Long emailCliente) {
+        try {
+            return ResponseEntity.ok(clienteService.findByEmail(emailCliente));
         } catch (ClienteNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
